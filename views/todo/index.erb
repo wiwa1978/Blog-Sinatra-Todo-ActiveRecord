@@ -1,0 +1,11 @@
+
+<h1>To do application</h1>
+<ul>
+<% @todos.each do |todo| %>
+  <li>
+    <h2><a href="/todos/<%= todo.id %>"><%= todo.content %></a>
+    <span><%= todo.created_at %></span>
+    </h2>
+  </li>
+<% end %>
+</ul> 
