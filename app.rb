@@ -66,6 +66,7 @@ end
     erb :"todo/delete"
   end
 
+  # Deletes the todo with id in the database
   delete '/todos/delete/:id' do
     if params.has_key?("ok")
       todo = Todo.find(params[:id])
