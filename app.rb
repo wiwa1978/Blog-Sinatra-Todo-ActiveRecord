@@ -8,6 +8,9 @@ class Todo < ActiveRecord::Base
 
 end
 
+  get "/?" do
+    redirect "/todos"
+  end
 
   # Get all of our routes
   get "/todos" do
@@ -57,7 +60,29 @@ end
     end
   end
    
-  # Delete the todo with the id in the database
-  delete '/todos/delete/:id' do
-  # Will be added later
+  # Show the delete form
+  get '/todos/delete/:id' do
+    @todo = Todo.find(params[:id])
+    erb :"todo/delete"
   end
+
+  # Deletes the todo with id in the database
+  delete '/todos/delete/:id' do
+    if params.has_key?("ok")
+      todo = Todo.find(params[:id])
+      todo.destroy
+      redirect '/'
+    else
+      redirect '/'
+    end
+  end
+
+
+helpers do
+ 
+  def prettify_date(time)
+   time.strftime("%d %b %Y") unless time==nil
+  end 
+
+end
+
